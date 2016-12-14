@@ -32,8 +32,11 @@ class SlugItem extends FieldItemBase {
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     $properties = [];
 
-    $properties['value'] = DataDefinition::create('string');
-    $properties['input'] = DataDefinition::create('string');
+    $properties['value'] = DataDefinition::create('string')
+      ->setLabel(t('Slug'));
+
+    $properties['input'] = DataDefinition::create('string')
+      ->setLabel(t('Input'));
 
     return $properties;
   }
