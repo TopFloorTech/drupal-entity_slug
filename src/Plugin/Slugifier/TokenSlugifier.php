@@ -24,4 +24,15 @@ class TokenSlugifier extends SlugifierBase {
 
     return $slug;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function information() {
+    $information = [];
+
+    $information[] = $this->t('The Token slugifier will replace all valid tokens with their respective real values.');
+
+    return array_merge($information, parent::information());
+  }
 }

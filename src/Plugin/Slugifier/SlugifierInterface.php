@@ -22,4 +22,13 @@ interface SlugifierInterface extends ConfigurablePluginInterface {
    *  The processed URL-friendly slug.
    */
   public function slugify($input, FieldableEntityInterface $entity);
+
+  /**
+   * Returns an array of informational strings for display in a list of
+   * instructions.
+   *
+   * @return string[]
+   *   An array of informational strings.
+   */
+  public function information();
 }

@@ -16,6 +16,7 @@ use Drupal\Core\Field\FormatterBase;
  *   label = @Translation("Default"),
  *   field_types = {
  *     "slug",
+ *     "slug_path",
  *   }
  * )
  */
