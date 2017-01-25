@@ -26,7 +26,7 @@ class TermParentTokenSlugifier extends SlugifierBase {
 
       $replacement = '';
 
-      if ($entity->hasField($entityField)) {
+      if ($entity->hasField($entityField) && !$entity->get($entityField)->isEmpty()) {
         /** @var TermInterface $termEntity */
         $termEntity = $entity->get($entityField)->entity;
 
