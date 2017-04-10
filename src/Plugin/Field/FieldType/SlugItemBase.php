@@ -97,7 +97,7 @@ abstract class SlugItemBase extends FieldItemBase implements SlugItemInterface {
    */
   public function preSave() {
     if ($this->getSetting('force_default')) {
-      $this->get('input')->applyDefaultValue();
+      $this->set('input', $this->getFieldDefinition()->getDefaultValueLiteral()[0]['input']);
     }
 
     $this->set('value', $this->slugify($this->get('input')->getValue()));
