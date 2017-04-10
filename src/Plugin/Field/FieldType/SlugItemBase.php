@@ -63,6 +63,7 @@ abstract class SlugItemBase extends FieldItemBase implements SlugItemInterface {
   public static function defaultFieldSettings() {
     return [
         'slugifier_plugins' => ['token' => 'token', 'pathauto' => 'pathauto'],
+        'force_default' => FALSE,
       ] + parent::defaultFieldSettings();
   }
 
@@ -82,6 +83,12 @@ abstract class SlugItemBase extends FieldItemBase implements SlugItemInterface {
       '#default_value' => $settings['slugifier_plugins'],
     ];
 
+    $element['force_default'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Force default value'),
+      '#default_value' => $settings['force_default'],
+    ];
+
     return $element;
   }
 
@@ -89,6 +96,10 @@ abstract class SlugItemBase extends FieldItemBase implements SlugItemInterface {
    * {@inheritdoc}
    */
   public function preSave() {
+    if ($this->getSetting('force_default')) {
+      $this->get('input')->applyDefaultValue();
+    }
+
     $this->set('value', $this->slugify($this->get('input')->getValue()));
 
     parent::preSave();
