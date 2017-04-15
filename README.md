@@ -1,6 +1,6 @@
 **SUMMARY**
 
-Implements a field that stores a URL-friendly slug for an entity.
+Entity Slug provides generic, configurable slugging functionality for any fieldable entity by adding Slug and Slug Path field types.
 
 **REQUIREMENTS**
 
