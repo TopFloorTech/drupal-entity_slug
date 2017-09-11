@@ -126,7 +126,7 @@ abstract class SlugItemBase extends FieldItemBase implements SlugItemInterface {
     $manager = \Drupal::service('plugin.manager.slugifier');
 
     $settings = $this->getSettings();
-    $slugifiers = $settings['slugifier_plugins'];
+    $slugifiers = array_filter($settings['slugifier_plugins']);
 
     $plugins = [];
 
@@ -136,6 +136,8 @@ abstract class SlugItemBase extends FieldItemBase implements SlugItemInterface {
 
       $plugins[$pluginId] = $slugifier;
     }
+
+    uasort($plugins, ['Drupal\Component\Utility\SortArray', 'sortByWeightProperty']);
 
     return $plugins;
   }

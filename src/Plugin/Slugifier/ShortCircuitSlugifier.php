@@ -1,10 +1,10 @@
 <?php
 
 namespace Drupal\entity_slug\Plugin\Slugifier;
+
 use Drupal\Core\Annotation\Translation;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\entity_slug\Annotation\Slugifier;
-use Drupal\pathauto\AliasCleaner;
 
 /**
  * @Slugifier(
@@ -26,7 +26,8 @@ class ShortCircuitSlugifier extends SlugifierBase {
 
       $replacement = '';
 
-      $valuesArray = preg_split('/\s*}?\s*{\s*/', $values);
+      $values = trim($values, '{}');
+      $valuesArray = preg_split('/\s*}\s*{\s*/', $values);
 
       if ($valuesArray) {
         foreach ($valuesArray as $value) {

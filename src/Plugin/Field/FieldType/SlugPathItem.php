@@ -34,7 +34,9 @@ class SlugPathItem extends SlugItemBase {
       $outputParts[] = parent::slugify($pathPart);
     }
 
-    $path = $this->separator . implode($this->separator, $outputParts);
+    $path = implode($this->separator, $outputParts);
+    $path = ltrim($path, $this->separator);
+    $path = $this->separator . $path;
 
     return $path;
   }

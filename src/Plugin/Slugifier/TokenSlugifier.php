@@ -22,6 +22,9 @@ class TokenSlugifier extends SlugifierBase {
       $entity->getEntityTypeId() => $entity,
     ]);
 
+    // Remove invalid tokens
+    $slug = preg_replace('/\[[^\]]+\]/', '', $slug);
+
     return $slug;
   }
 
