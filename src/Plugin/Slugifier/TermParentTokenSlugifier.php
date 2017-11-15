@@ -1,6 +1,7 @@
 <?php
 
 namespace Drupal\entity_slug\Plugin\Slugifier;
+
 use Drupal\Core\Annotation\Translation;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\entity_slug\Annotation\Slugifier;
@@ -30,7 +31,7 @@ class TermParentTokenSlugifier extends SlugifierBase {
         /** @var TermInterface $termEntity */
         $termEntity = $entity->get($entityField)->entity;
 
-        if (!empty($entity)) {
+        if (!empty($termEntity)) {
           $topTerm = $this->getTopTerm($termEntity);
 
           if ($topTerm->hasField($termField)) {
@@ -70,10 +71,14 @@ class TermParentTokenSlugifier extends SlugifierBase {
     /** @var \Drupal\taxonomy\TermStorageInterface $termStorage */
     $termStorage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
 
-    $parents = $termStorage->loadParents($term->id());
+    while (TRUE) {
+      $parents = $termStorage->loadParents($term->id());
 
-    if (!empty($parents)) {
-      $term = array_pop($parents);
+      if (!empty($parents)) {
+        $term = array_pop($parents);
+      } else {
+        break;
+      }
     }
 
     return $term;
